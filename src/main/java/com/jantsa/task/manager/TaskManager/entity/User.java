@@ -1,0 +1,88 @@
+package com.jantsa.task.manager.TaskManager.entity;
+
+import jakarta.persistence.*;
+
+@Table(name = "Users")
+@Entity
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surName")
+    private String surName;
+
+    @Column(name = "company_id")
+    private Integer companyId;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "user_role")
+    private String userRole;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public User(Integer id, String name, String surName, Integer companyId, String password, String userRole) {
+        this.id = id;
+        this.name = name;
+        this.surName = surName;
+        this.companyId = companyId;
+        this.password = password;
+        this.userRole = userRole;
+    }
+
+    public User() {
+    }
+}
