@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({companyId,password}), // JavaScript nesnesini JSON string'ine dönüştür
+                body: JSON.stringify(data), // JavaScript nesnesini JSON string'ine dönüştür
             });
 
             // Yanıtı işle

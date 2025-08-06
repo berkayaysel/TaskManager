@@ -31,6 +31,7 @@ public class LoginServiceImpl implements LoginService {
                 System.out.println("Oturum açma başarılı!");
 
                 String userRole = user.getUserRole();
+                requestLogin.setRole(userRole);
 
 
                 System.out.println(userRole);
