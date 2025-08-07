@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="AdminDashBoardStyle.css">
+</head>
+<body>
+<div class="dashboard">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Kullanıcı Arama -->
+    <section>
+        <h2>Kullanıcı Ara</h2>
+        <input type="text" id="searchUser" placeholder="Kullanıcı adı girin">
+        <button onclick="searchUser()">Ara</button>
+        <div id="userInfo"></div>
+    </section>
+
+    <!-- Şifre Değiştirme -->
+    <section>
+        <h2>Şifre Değiştir</h2>
+        <input type="text" id="username" placeholder="Kullanıcı adı">
+        <input type="password" id="newPassword" placeholder="Yeni şifre">
+        <button onclick="changePassword()">Değiştir</button>
+    </section>
+
+    <!-- Task Atama -->
+    <section>
+        <h2>Task Atama</h2>
+        <input type="text" id="taskUser" placeholder="Gönderen Kullanıcı">
+        <input type="text" id="assignTo" placeholder="Personel">
+        <textarea id="taskDescription" placeholder="Task açıklaması"></textarea>
+        <button onclick="assignTask()">Ata</button>
+    </section>
+
+    <!-- Task Listesi -->
+    <section>
+        <h2>Task Listesi</h2>
+        <table id="taskTable">
+            <thead>
+            <tr>
+                <th>Task</th>
+                <th>Gönderen</th>
+                <th>Personel</th>
+                <th>Durum</th>
+                <th>Zaman</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- JS ile doldurulacak -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- İstatistikler -->
+    <section>
+        <h2>İstatistikler</h2>
+        <div id="stats">
+            <!-- JS ile doldurulacak -->
+        </div>
+    </section>
+</div>
+
+<script src="AdminDashBoardScript.js"></script>
+</body>
+</html>
