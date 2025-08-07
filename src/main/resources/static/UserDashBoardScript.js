@@ -17,24 +17,26 @@ function submitRequest() {
     return;
   }
 
-  fetch('/user-dashboard/new', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      header: header,
-      body: body,
-      companyId: companyId
-    })
+fetch('/user-dashboard/new', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    header: header,
+    body: body,
+    companyId: companyId
   })
-  .then(response => {
-    if (response.ok) {
-      alert("Talep başarıyla gönderildi.");
-      document.getElementById('taskHeader').value = '';
-      document.getElementById('requestInput').value = '';
-    } else {
-      alert("Gönderme başarısız oldu.");
-    }
-  })
+})
+.then(response => {
+  if (response.status === 200 || response.status === 201) {
+    alert("Talep başarıyla gönderildi.");
+    document.getElementById('taskHeader').value = '';
+    document.getElementById('requestInput').value = '';
+  } else {
+    return response.text().then(msg => {
+      alert("Gönderme başarısız oldu: " + msg);
+    });
+  }
+})
   .catch(err => {
     console.error("Sunucu hatası:", err);
     alert("Sunucuya bağlanılamadı.");

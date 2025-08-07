@@ -30,13 +30,21 @@ function submitPasswordChange() {
     return response.text();
   })
   .then(text => {
-    message.textContent = text;
+    message.textContent = "✅ Şifreniz başarıyla değiştirildi. Giriş ekranına yönlendiriliyorsunuz...";
     message.style.color = "green";
     document.getElementById("oldPassword").value = "";
     document.getElementById("newPassword").value = "";
+
+    setTimeout(() => {
+      logout(); // 2 saniye sonra çıkış yap ve login ekranına yönlendir
+    }, 2000);
   })
   .catch(err => {
     message.textContent = "Hata: " + err.message;
     message.style.color = "red";
   });
+}
+function logout() {
+  localStorage.removeItem("companyId");
+  window.location.href = "http://localhost:8080/task/login";
 }

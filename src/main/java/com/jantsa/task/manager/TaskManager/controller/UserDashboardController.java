@@ -1,9 +1,7 @@
 package com.jantsa.task.manager.TaskManager.controller;
 
 
-import com.jantsa.task.manager.TaskManager.entity.Report;
-import com.jantsa.task.manager.TaskManager.entity.User;
-import com.jantsa.task.manager.TaskManager.service.BugReportServiceImlp;
+import com.jantsa.task.manager.TaskManager.dto.BugReportRequestDto;
 import com.jantsa.task.manager.TaskManager.service.UserDashBoardImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +17,6 @@ public class UserDashboardController {
     @Autowired
     UserDashBoardImpl userDashBoard;
 
-    @Autowired
-    BugReportServiceImlp bugReportServiceImlp;
-
 
     @GetMapping
     public String getUserDashboard() {
@@ -29,12 +24,10 @@ public class UserDashboardController {
         return "/UserDashBoard";
     }
 
-    @PostMapping(path = "/new")
-    public ResponseEntity<Void> report(@RequestBody Report report){
-
-        bugReportServiceImlp.save(report);
-
-        return ResponseEntity.ok().build();
+    @PostMapping("/new")
+    public ResponseEntity<String> createBugReport(@RequestBody BugReportRequestDto request) {
+        userDashBoard.save(request);
+        return ResponseEntity.ok("Talep başarıyla kaydedildi");
     }
 
 
