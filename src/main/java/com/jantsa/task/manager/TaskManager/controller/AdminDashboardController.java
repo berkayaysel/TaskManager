@@ -6,11 +6,9 @@ import com.jantsa.task.manager.TaskManager.entity.User;
 import com.jantsa.task.manager.TaskManager.service.AdminDashBoardImpl;
 import com.jantsa.task.manager.TaskManager.service.UserDashBoardImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,7 +38,18 @@ public class AdminDashboardController {
         return adminDashBoard.findAll();
     }
 
+    @PostMapping("/reports/{id}/reject")
+    @ResponseBody
+    public Report rejectReport(@PathVariable Integer id) {
+        return adminDashBoard.rejectReport(id);
+    }
 
-
+    @PostMapping("/reports/{id}/complete")
+    @ResponseBody
+    public Report completeReport(
+            @PathVariable Integer id,
+            @RequestParam("actorId") Integer actorId) {
+        return adminDashBoard.completeReport(id, actorId);
+    }
 
 }

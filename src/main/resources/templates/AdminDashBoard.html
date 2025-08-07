@@ -12,6 +12,8 @@
     <div class="top-bar-buttons">
         <button onclick="changePassword()">Şifre Değiştir</button>
         <button onclick="logout()">Çıkış Yap</button>
+        <button class="complete-btn" onclick="completeReport(${report.id})">Tamamlandı</button>
+
     </div>
 </div>
 <h1>Görev Yönetimi - Admin Paneli</h1>
@@ -22,8 +24,8 @@
         <option value="beklemede">Beklemede</option>
         <option value="atandı">Atandı</option>
         <option value="aktif">Aktif</option>
-        <option value="reddedildi">Reddedildi</option>
-        <option value="yapıldı">Yapıldı</option>
+        <option value="IPTAL">IPTAL</option>
+        <option value="TAMAMLANDI">TAMAMLANDI</option>
     </select>
 </div>
 

@@ -38,8 +38,8 @@ th {
 .status-beklemede { background-color: gray; }
 .status-atandı { background-color: orange; }
 .status-aktif { background-color: blue; }
-.status-reddedildi { background-color: red; }
-.status-yapıldı { background-color: green; }
+.status-IPTAL { background-color: red; }
+.status-TAMAMLANDI { background-color: green; }
 
 select, button {
     padding: 5px;

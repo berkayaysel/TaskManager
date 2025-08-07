@@ -1,5 +1,7 @@
 package com.jantsa.task.manager.TaskManager.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jantsa.task.manager.TaskManager.enums.TaskStatus;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
@@ -43,7 +45,7 @@ public class Report {
     private Integer companyId;
 
     @Column(name = "status")
-    private String status;
+    private TaskStatus status;
 
     @Column(name = "personal_id")
     private Integer personalId;
@@ -61,7 +63,7 @@ public class Report {
                   LocalDateTime kabul_date,
                   LocalDateTime bitis_date,
                   Integer companyId,
-                  String status,
+                  TaskStatus status,
                   Integer personalId,
                   String personal_name)
     {
@@ -122,6 +124,7 @@ public class Report {
         this.body = body;
     }
 
+    @JsonProperty("createdAt")
     public LocalDateTime getTalep_date() {
         return talep_date;
     }
@@ -130,6 +133,7 @@ public class Report {
         this.talep_date = talep_date;
     }
 
+    @JsonProperty("assignedAt")
     public LocalDateTime getAtanma_date() {
         return atanma_date;
     }
@@ -138,6 +142,7 @@ public class Report {
         this.atanma_date = atanma_date;
     }
 
+    @JsonProperty("rejectedAt")
     public LocalDateTime getIptal_date() {
         return iptal_date;
     }
@@ -146,6 +151,7 @@ public class Report {
         this.iptal_date = iptal_date;
     }
 
+    @JsonProperty("acceptedAt")
     public LocalDateTime getKabul_date() {
         return kabul_date;
     }
@@ -154,6 +160,7 @@ public class Report {
         this.kabul_date = kabul_date;
     }
 
+    @JsonProperty("completedAt")
     public LocalDateTime getBitis_date() {
         return bitis_date;
     }
@@ -170,11 +177,11 @@ public class Report {
         this.companyId = companyId;
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 }

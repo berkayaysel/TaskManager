@@ -1,3 +1,6 @@
+let reports = [];
+
+const CURRENT_USER_ID = parseInt(localStorage.getItem("userId"), 10) || 1;
 
 
 function renderTable() {
@@ -8,15 +11,18 @@ function renderTable() {
     const row = document.createElement('tr');
     const statusClass = `status-${report.status}`;
 
+
     row.innerHTML = `
       <td>${report.id}</td>
       <td>${report.header}</td>
       <td>${report.body}</td>
       <td><span class="status-badge ${statusClass}">${report.status}</span></td>
+
       <td>
-        <div><strong>Oluşturuldu:</strong> ${report.createdAt ?? '-'}</div>
-        <div><strong>Atandı:</strong> ${report.assignedAt ?? '-'}</div>
-        <div><strong>Tamamlandı:</strong> ${report.completedAt ?? '-'}</div>
+    <div><strong>Oluşturuldu:</strong> ${report.createdAt ?? '-'}</div>
+    <div><strong>Atandı:</strong>   ${report.assignedAt ?? '-'}</div>
+    <div><strong>Tamamlandı:</strong>${report.completedAt ?? '-'}</div>
+    <div><strong>Reddedildi:</strong>${report.rejectedAt ?? '-'}</div>
       </td>
       <td>
         <select id="personnelSelect-${report.id}">
@@ -30,7 +36,7 @@ function renderTable() {
         <button class="assign-btn" onclick="assignPersonnel(${report.id})">Tamam</button>
       </td>
       <td>
-        <button class="complete-btn" onclick="markAsCompleted(${report.id})">Tamamlandı</button>
+        <button class="complete-btn" onclick="completeReport(${report.id})">Tamamlandı</button>
         <button class="reject-btn" onclick="rejectReport(${report.id})">Talebi Reddet</button>
       </td>
     `;
@@ -39,15 +45,30 @@ function renderTable() {
   });
 }
 
-
-function assignPersonnel(reportId) {
+function assignPersonnel(reportId) {   //TODO: contoller servis katmanları yazılıp çağrılacak
   const select = document.getElementById(`personnelSelect-${reportId}`);
   const personnelId = parseInt(select.value);
+  if (!personnelId) { alert("Lütfen bir personel seçin."); return; }
 
-  if (!personnelId) {
-    alert("Lütfen bir personel seçin.");
-    return;
-  }
+  fetch(`http://localhost:8080/admin-dashboard/reports/${reportId}/assign?actorId=${personnelId}`, {
+    method: 'POST'
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Sunucu hatası");
+    return res.json();
+  })
+  .then(updatedReport => {
+    const idx = reports.findIndex(r => r.id === updatedReport.id);
+    reports[idx] = updatedReport;
+    alert(`Görev ${reportId} atandı.`);
+    renderTable();
+  })
+  .catch(e => {
+    console.error(e);
+    alert("Atama sırasında hata oluştu");
+  });
+}
+
 
   const report = reports.find(r => r.id === reportId);
   report.assignedPersonnelId = personnelId;
@@ -107,21 +128,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-function markAsCompleted(reportId) {
-  const report = reports.find(r => r.id === reportId);
-  report.status = 'yapıldı';
-  report.completedAt = new Date().toISOString().slice(0, 16).replace('T', ' ');
-  alert(`Görev ${reportId} admin tarafından tamamlandı.`);
-  renderTable();
-}
 
 function rejectReport(reportId) {
   if (!confirm("Bu görevi reddetmek istediğinize emin misiniz?")) return;
-  const report = reports.find(r => r.id === reportId);
-  report.status = 'reddedildi';
-  report.completedAt = new Date().toISOString().slice(0, 16).replace('T', ' ');
-  alert(`Görev ${reportId} admin tarafından reddedildi.`);
-  renderTable();
+
+  fetch(`http://localhost:8080/admin-dashboard/reports/${reportId}/reject`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Sunucuda hata oluştu');
+    return res.json();
+  })
+  .then(updatedReport => {
+    // Front-end listemizi güncelle
+    const idx = reports.findIndex(r => r.id === updatedReport.id);
+    reports[idx] = updatedReport;
+    alert(`Görev ${reportId} IPTAL.`);
+    renderTable();
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Reddetme sırasında bir hata oluştu.');
+  });
 }
 
 function changePassword() {
@@ -157,5 +186,26 @@ function fetchReports() {
       console.error("Raporlar alınamadı:", err);
     });
 }
+function completeReport(reportId) {
+  if (!confirm("Bu görevi tamamlamak istediğinize emin misiniz?")) return;
 
+  const actorId = CURRENT_USER_ID; // Oturum açmış admin/personal ID’si
 
+  fetch(`http://localhost:8080/admin-dashboard/reports/${reportId}/complete?actorId=${actorId}`, {
+    method: 'POST'
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Sunucuda hata oluştu');
+    return res.json();
+  })
+  .then(updatedReport => {
+    const idx = reports.findIndex(r => r.id === updatedReport.id);
+    reports[idx] = updatedReport;
+    alert(`Görev ${reportId} tamamlandı.`);
+    renderTable();
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Tamamlama sırasında bir hata oluştu.');
+  });
+}
