@@ -7,14 +7,19 @@ import com.jantsa.task.manager.TaskManager.entity.User;
 import com.jantsa.task.manager.TaskManager.repository.BugReportRepository;
 import com.jantsa.task.manager.TaskManager.repository.UserDashBoardRepository;
 
+import com.jantsa.task.manager.TaskManager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserDashBoardImpl implements UserDashBoard{
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     UserDashBoardRepository userDashBoardRepository;
@@ -54,6 +59,11 @@ public class UserDashBoardImpl implements UserDashBoard{
 
         bugReportRepository.save(new_report);
 
+    }
+
+    @Override
+    public List<User> findByUserRole() {
+        return List.of();
     }
 }
 

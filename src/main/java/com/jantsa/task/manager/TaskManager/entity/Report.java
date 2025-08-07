@@ -1,6 +1,7 @@
 package com.jantsa.task.manager.TaskManager.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,12 @@ public class Report {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "personal_id")
+    private Integer personalId;
+
+    @Column(name = "personal_name")
+    private String personal_name;
+
 
     public Report(Integer id,
                   String header,
@@ -54,7 +61,9 @@ public class Report {
                   LocalDateTime kabul_date,
                   LocalDateTime bitis_date,
                   Integer companyId,
-                  String status)
+                  String status,
+                  Integer personalId,
+                  String personal_name)
     {
         this.id = id;
         this.header = header;
@@ -66,8 +75,25 @@ public class Report {
         this.bitis_date = bitis_date;
         this.companyId = companyId;
         this.status = status;
+        this.personalId = personalId;
+        this.personal_name = personal_name;
     }
 
+    public Integer getPersonalId() {
+        return personalId;
+    }
+
+    public void setPersonalId(Integer personalId) {
+        this.personalId = personalId;
+    }
+
+    public String getPersonal_name() {
+        return personal_name;
+    }
+
+    public void setPersonal_name(String personal_name) {
+        this.personal_name = personal_name;
+    }
 
     public Report() {
     }

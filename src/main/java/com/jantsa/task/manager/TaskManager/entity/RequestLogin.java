@@ -1,5 +1,6 @@
 package com.jantsa.task.manager.TaskManager.entity;
 
+import com.jantsa.task.manager.TaskManager.enums.UserRole;
 import jakarta.persistence.*;
 
 
@@ -8,13 +9,13 @@ public class RequestLogin {
     private Integer id;
     private Integer company_id;
     private String password;
-    private String role;
+    private UserRole userRole;
 
-    public RequestLogin(Integer company_id, String password, Integer id, String role) {
+    public RequestLogin(Integer company_id, String password, Integer id, UserRole userRole) {
         this.company_id = company_id;
         this.password = password;
         this.id = id;
-        this.role = role;
+        this.userRole = userRole;
     }
 
     public RequestLogin() {
@@ -44,11 +45,11 @@ public class RequestLogin {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }

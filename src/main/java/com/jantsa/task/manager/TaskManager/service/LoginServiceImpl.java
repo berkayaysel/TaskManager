@@ -2,6 +2,7 @@ package com.jantsa.task.manager.TaskManager.service;
 
 import com.jantsa.task.manager.TaskManager.entity.RequestLogin;
 import com.jantsa.task.manager.TaskManager.entity.User;
+import com.jantsa.task.manager.TaskManager.enums.UserRole;
 import com.jantsa.task.manager.TaskManager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,18 +31,18 @@ public class LoginServiceImpl implements LoginService {
                 // Şifreler eşleşiyorsa, başarılı oturum açma
                 System.out.println("Oturum açma başarılı!");
 
-                String userRole = user.getUserRole();
-                requestLogin.setRole(userRole);
+                UserRole userRole = user.getUserRole();
+                requestLogin.setUserRole(userRole);
 
 
                 System.out.println(userRole);
-                if("Admin".equalsIgnoreCase(userRole)) {
+                if("Admin".equalsIgnoreCase(String.valueOf(userRole))) {
                     System.out.println("Admin Paneline Yönlendiriliyor... ");
                     return requestLogin;
-                } else if("Personal".equalsIgnoreCase(userRole)) {
+                } else if("Personal".equalsIgnoreCase(String.valueOf(userRole))) {
                     System.out.println("Personel Paneline Yönlendiriliyor...");
                     return requestLogin;
-                } else if("User".equalsIgnoreCase(userRole)) {
+                } else if("User".equalsIgnoreCase(String.valueOf(userRole))) {
                     System.out.println("Kullanıcı Paneline Yönlendiriliyor...");
                     return requestLogin;
                 } else {

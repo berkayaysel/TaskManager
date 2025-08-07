@@ -1,5 +1,6 @@
 package com.jantsa.task.manager.TaskManager.entity;
 
+import com.jantsa.task.manager.TaskManager.enums.UserRole;
 import jakarta.persistence.*;
 
 @Table(name = "Users")
@@ -24,7 +25,8 @@ public class User {
     private String password;
 
     @Column(name = "user_role")
-    private String userRole;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
     public Integer getId() {
         return id;
@@ -66,15 +68,15 @@ public class User {
         this.password = password;
     }
 
-    public String getUserRole() {
+    public UserRole getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
+    public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
 
-    public User(Integer id, String name, String surName, Integer companyId, String password, String userRole) {
+    public User(Integer id, String name, String surName, Integer companyId, String password, UserRole userRole) {
         this.id = id;
         this.name = name;
         this.surName = surName;

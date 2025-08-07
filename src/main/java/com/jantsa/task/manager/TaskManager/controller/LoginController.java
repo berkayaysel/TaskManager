@@ -2,6 +2,7 @@ package com.jantsa.task.manager.TaskManager.controller;
 
 import com.jantsa.task.manager.TaskManager.entity.RequestLogin;
 import com.jantsa.task.manager.TaskManager.entity.User;
+import com.jantsa.task.manager.TaskManager.enums.UserRole;
 import com.jantsa.task.manager.TaskManager.service.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,13 @@ public class LoginController {
             return ResponseEntity.status(401).body("Giriş başarısız: Kullanıcı bulunamadı veya şifre yanlış.");
         }
 
-        String userRole = loginResponse.getRole();
+        UserRole userRole = loginResponse.getUserRole();
         String redirectUrl;
-        if("Admin".equalsIgnoreCase(userRole)) {
+        if("Admin".equalsIgnoreCase(String.valueOf(userRole))) {
             redirectUrl = "/admin-dashboard"; // API endpoint'lerini kullanıyoruz
-        } else if("Personal".equalsIgnoreCase(userRole)) {
+        } else if("Personal".equalsIgnoreCase(String.valueOf(userRole))) {
             redirectUrl = "/personal-dashboard";
-        } else if ("User".equalsIgnoreCase(userRole)) {
+        } else if ("User".equalsIgnoreCase(String.valueOf(userRole))) {
             redirectUrl = "/user-dashboard";
         } else {
             return ResponseEntity.status(500).body("Sunucu hatası: Tanımsız kullanıcı rolü.");
