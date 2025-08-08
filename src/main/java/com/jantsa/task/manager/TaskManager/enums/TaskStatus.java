@@ -6,7 +6,7 @@ public enum TaskStatus {
     BEKLIYOR,
     ONAYLANDI,
     IPTAL,
-    TAMAMLANDI
+    AKTIF, TAMAMLANDI
 
 
 }

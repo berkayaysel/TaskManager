@@ -30,7 +30,7 @@ public class LoginController {
         String redirectUrl;
         if("Admin".equalsIgnoreCase(String.valueOf(userRole))) {
             redirectUrl = "/admin-dashboard"; // API endpoint'lerini kullanıyoruz
-        } else if("Personal".equalsIgnoreCase(String.valueOf(userRole))) {
+        } else if("Personel".equalsIgnoreCase(String.valueOf(userRole))) {
             redirectUrl = "/personal-dashboard";
         } else if ("User".equalsIgnoreCase(String.valueOf(userRole))) {
             redirectUrl = "/user-dashboard";

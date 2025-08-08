@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
                 if("Admin".equalsIgnoreCase(String.valueOf(userRole))) {
                     System.out.println("Admin Paneline Yönlendiriliyor... ");
                     return requestLogin;
-                } else if("Personal".equalsIgnoreCase(String.valueOf(userRole))) {
+                } else if("Personel".equalsIgnoreCase(String.valueOf(userRole))) {
                     System.out.println("Personel Paneline Yönlendiriliyor...");
                     return requestLogin;
                 } else if("User".equalsIgnoreCase(String.valueOf(userRole))) {

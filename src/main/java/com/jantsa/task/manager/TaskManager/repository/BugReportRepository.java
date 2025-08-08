@@ -11,10 +11,5 @@ import java.util.List;
 @Repository
 public interface BugReportRepository extends JpaRepository<Report,Integer> {
 
-
-
-
-
-
-
+    List<Report> findByPersonalId(Integer personalId);
 }
