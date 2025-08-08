@@ -1,30 +1,92 @@
-/* Personel paneli için stil kodları */
+/* PersonalDashBoardStyle.css */
 
+/* Genel Sayfa Ayarları */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
+    background-color: #f4f4f4; /* Personal panelinden alındı */
+    color: #333; /* Personal panelinden alındı */
+    margin: 20px; /* Admin panelinden alındı */
     padding: 0;
 }
 
+h1 {
+    color: #333; /* Admin panelinden alındı */
+}
+
+/* Üst Bar */
 .top-bar {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    padding: 10px; /* Admin panelinden alındı */
+    background-color: #e0e0e0; /* Admin panelinden alındı */
 }
 
 .top-bar-buttons button {
-    background-color: #28a745;
+    margin-left: 10px; /* Admin panelinden alındı */
+    padding: 8px 14px; /* Admin panelinden alındı */
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; /* Personal panelinden alındı */
+}
+
+.top-bar-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Tablo Ayarları */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Admin panelinden alındı */
+    margin-top: 10px; /* Admin panelinden alındı */
+}
+
+th, td {
+    border: 1px solid #ccc; /* Admin panelinden alındı */
+    padding: 10px; /* Admin panelinden alındı */
+    text-align: left; /* Admin panelinden alındı */
+}
+
+th {
+    background-color: #f2f2f2; /* Admin panelinden alındı */
+}
+
+/* Durum Rozetleri */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.status-beklemede { background-color: gray; }
+.status-atandı { background-color: orange; }
+.status-aktif { background-color: blue; }
+.status-IPTAL { background-color: red; }
+.status-TAMAMLANDI { background-color: green; }
+
+/* Butonlar */
+select, button {
+    padding: 5px;
+}
+
+button.accept-btn {
+    background-color: #4CAF50; /* Tamamlandı butonu rengi */
     color: white;
     border: none;
-    padding: 8px 16px;
-    margin-left: 10px;
-    border-radius: 5px;
+    padding: 5px 8px;
     cursor: pointer;
-    font-size: 14px;
+    border-radius: 4px;
 }
-/* ... diğer stiller */
+
+button.reject-btn {
+    background-color: #f44336; /* Reddet butonu rengi */
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
