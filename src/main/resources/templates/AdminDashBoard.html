@@ -13,7 +13,6 @@
         <button onclick="changePassword()">Şifre Değiştir</button>
         <button onclick="logout()">Çıkış Yap</button>
         <button class="complete-btn" onclick="completeReport(${report.id})">Tamamlandı</button>
-
     </div>
 </div>
 <h1>Görev Yönetimi - Admin Paneli</h1>
@@ -49,6 +48,7 @@
 
 
 <script src="/AdminDashBoardScript.js"></script>
+<script src="/UserDashBoardScript.js"></script>
 <script>
     if (!localStorage.getItem("companyId")) {
       window.location.href = "http://localhost:8080/task/login";

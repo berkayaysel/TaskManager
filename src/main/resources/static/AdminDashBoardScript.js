@@ -19,10 +19,12 @@ function renderTable() {
       <td><span class="status-badge ${statusClass}">${report.status}</span></td>
 
       <td>
-    <div><strong>Oluşturuldu:</strong> ${report.createdAt ?? '-'}</div>
-    <div><strong>Atandı:</strong>   ${report.assignedAt ?? '-'}</div>
-    <div><strong>Tamamlandı:</strong>${report.completedAt ?? '-'}</div>
-    <div><strong>Reddedildi:</strong>${report.rejectedAt ?? '-'}</div>
+    <td>
+        <div><strong>Oluşturuldu:</strong> ${report.talep_date ?? '-'}</div>
+        <div><strong>Atandı:</strong>   ${report.atanma_date ?? '-'}</div>
+        <div><strong>Tamamlandı:</strong>${report.bitis_date ?? '-'}</div>
+        <div><strong>Reddedildi:</strong>${report.iptal_date ?? '-'}</div>
+    </td>
       </td>
       <td>
         <select id="personnelSelect-${report.id}">
@@ -67,13 +69,13 @@ function assignPersonnel(reportId) {   //TODO: contoller servis katmanları yaz�
     console.error(e);
     alert("Atama sırasında hata oluştu");
   });
-}
 
 
   const report = reports.find(r => r.id === reportId);
   report.assignedPersonnelId = personnelId;
   report.status = 'atandı';
   report.assignedAt = new Date().toISOString().slice(0, 16).replace('T', ' ');
+
 
   alert(`Görev ${reportId}, ${personnelList.find(p => p.id === personnelId).name} adlı personele atandı.`);
   // TODO: fetch('/admin/assign', ...) ile backend'e gönder
@@ -208,4 +210,16 @@ function completeReport(reportId) {
     console.error(err);
     alert('Tamamlama sırasında bir hata oluştu.');
   });
+}
+
+function changePassword() {
+  window.location.href = '/user-dashboard/change-password';
+}
+
+
+function logout() {
+
+  localStorage.removeItem("companyId");
+
+  window.location.href = "http://localhost:8080/task/login";
 }

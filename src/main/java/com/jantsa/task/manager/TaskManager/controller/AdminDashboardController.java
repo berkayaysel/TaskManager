@@ -3,6 +3,7 @@ package com.jantsa.task.manager.TaskManager.controller;
 
 import com.jantsa.task.manager.TaskManager.entity.Report;
 import com.jantsa.task.manager.TaskManager.entity.User;
+import com.jantsa.task.manager.TaskManager.repository.BugReportRepository;
 import com.jantsa.task.manager.TaskManager.service.AdminDashBoardImpl;
 import com.jantsa.task.manager.TaskManager.service.UserDashBoardImpl;
 import org.springframework.beans.factory.annotation.Autowired;

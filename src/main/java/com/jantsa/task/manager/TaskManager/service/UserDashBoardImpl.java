@@ -4,6 +4,7 @@ package com.jantsa.task.manager.TaskManager.service;
 import com.jantsa.task.manager.TaskManager.dto.BugReportRequestDto;
 import com.jantsa.task.manager.TaskManager.entity.Report;
 import com.jantsa.task.manager.TaskManager.entity.User;
+import com.jantsa.task.manager.TaskManager.enums.TaskStatus;
 import com.jantsa.task.manager.TaskManager.repository.BugReportRepository;
 import com.jantsa.task.manager.TaskManager.repository.UserDashBoardRepository;
 
@@ -56,6 +57,7 @@ public class UserDashBoardImpl implements UserDashBoard{
         new_report.setAtanma_date(null);
         new_report.setTalep_date(now);
         new_report.setIptal_date(null);
+        new_report.setStatus(TaskStatus.BEKLIYOR);
 
         bugReportRepository.save(new_report);
 
